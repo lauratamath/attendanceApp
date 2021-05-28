@@ -2,9 +2,19 @@
 /* eslint-disable no-undef */
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import LogIn from './Login'
+import HomePage from './Home'
+
+navigator.serviceWorker.register('serviceworker.js')
 
 const App = () => (
-  <h1>Hello world</h1>
+  <BrowserRouter>
+    <Switch>
+      <Route path="/clasestaught" component={HomePage} />
+      <Route path="/" component={LogIn} />
+    </Switch>
+  </BrowserRouter>
 )
 
 ReactDOM.render(

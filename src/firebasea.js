@@ -1,4 +1,6 @@
-import firebase from 'firebase'
+/* eslint-disable import/no-extraneous-dependencies */
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 
 const configFirebase = {
   apiKey: 'AIzaSyBjYCgZ9AXq7-OGKyHondjdrUvvrFenlX4',

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import firebase from 'firebase'
 import PropTypes from 'prop-types'
+import fireDB from './firebasea'
 import './css/Home.css'
 
 const Button = ({ option, onClick }) => (
@@ -16,7 +16,7 @@ Button.propTypes = {
 const HomePage = () => {
   const history = useHistory()
   const actualUsername = localStorage.getItem('actualUsername')
-  const db = firebase.firestore()
+  const db = fireDB.firestore()
   const collection = db.collection('clases')
   const [clases, setClases] = useState([])
 

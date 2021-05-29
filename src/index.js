@@ -6,11 +6,10 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import LogIn from './Login'
 import HomePage from './Home'
 
-navigator.serviceWorker.register('serviceworker.js')
-
 const App = () => (
   <BrowserRouter>
     <Switch>
+      <Route path="/hello" component={() => <h1>hola</h1>} />
       <Route path="/clasestaught" component={HomePage} />
       <Route path="/" component={LogIn} />
     </Switch>

@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import fireDB from './firebasea'
+import '@firebase/auth'
 import './css/Home.css'
 
 const Button = ({ option, onClick }) => (
@@ -17,43 +18,41 @@ const HomePage = () => {
   const history = useHistory()
   const actualUsername = localStorage.getItem('actualUsername')
   const db = fireDB.firestore()
-  const collection = db.collection('clases')
-  const [clases, setClases] = useState([])
+  const kim = db.collection('students').doc('18324')
+  /* const julian = db.collection('students').doc('19343')
+  const june = db.collection('students').doc('19234') */
 
-  useEffect(() => {
-    collection.onSnapshot((snapshot) => {
-      const allClases = []
-      snapshot.forEach((item) => {
-        const datos = item.data()
-        datos.id = item.id
-        allClases.push(datos)
-      })
+  kim.onSnapshot((response) => {
+    document.getElementById('students').append(
+      <ul id="studients">
+        <li
+        /* onClick={cameToClass} */>
+          $
+          {response.data().name}
+          $
+          {response.data().surname}
+          $
+          {response.data().assistance ? '&check;' : '&times'}
+        </li>
+      </ul>,
+    )
+  })
 
-      setClases(allClases)
-    })
-  }, [])
-
-  const actualClass = (students) => {
-    localStorage.setItem('actualCourse', students)
-    history.push('/assistance')
+  Window.cameToClass = () => {
+    kim.update({ assistance: true })
   }
 
   return (
     <div>
       <h1>
-        Welcome
+        Welcome &nbsp;
         { actualUsername}
       </h1>
-
-      {clases.map((result) => (
-        <Button
-          option={result.students}
-          key={result.id}
-          onClick={() => actualClass(result.students)}
-        />
-      ))}
-
-      <Button option="❌" onClick={() => history.push('/')} />
+      <h2>Asistencia de Salud pública</h2>
+      <ul id="studients" />
+      <Button option="❌" onClick={() => history.push('/')}>
+        firebase.auth().signOut()
+      </Button>
     </div>
   )
 }
